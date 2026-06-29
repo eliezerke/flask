@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SuperApp - Download</title>
+    <title>LiveSongbook - Download</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
@@ -27,13 +27,11 @@
     <nav class="bg-black/80 backdrop-blur-md border-b border-zinc-800 fixed w-full z-50">
         <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <div class="w-8 h-8 bg-gradient-to-br from-violet-500 to-fuchsia-500 rounded-xl flex items-center justify-center">
-                    <i class="fas fa-rocket text-white"></i>
-                </div>
-                <span class="text-2xl font-bold tracking-tight">SuperApp</span>
+                <img src="https://eliezerkenya.pythonanywhere.com/static/img/bride.png" alt="LiveSongbook" class="w-10 h-10 object-contain rounded-xl">
+                <span class="text-2xl font-bold tracking-tight">LiveSongbook</span>
             </div>
             <div class="flex items-center gap-8">
-                <a href="https://mainwebsite.com" target="_blank" 
+                <a href="https://eliezerkenya.pythonanywhere.com/lsb" target="_blank" 
                    class="text-zinc-400 hover:text-white transition-colors flex items-center gap-2">
                     <i class="fas fa-globe"></i>
                     <span>Main Site</span>
@@ -51,13 +49,13 @@
             <div>
                 <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-3xl text-sm mb-6">
                     <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
-                    Latest version: v2.1.3
+                    Latest version: v1.0.0
                 </div>
                 <h1 class="text-6xl md:text-7xl font-bold leading-tight tracking-tighter mb-6">
-                    The future is<br>already here
+                    Sing together.<br>Anywhere.
                 </h1>
                 <p class="text-xl text-zinc-300 max-w-md mb-10">
-                    SuperApp delivers seamless experiences across all your devices. Fast, secure, and beautiful.
+                    LiveSongbook brings your favorite songs to every device. Real-time lyrics, powerful search, and beautiful offline mode.
                 </p>
                 <div class="flex flex-wrap gap-4">
                     <button onclick="scrollToDownloads()" 
@@ -65,7 +63,7 @@
                         <i class="fas fa-download"></i>
                         Get it now
                     </button>
-                    <a href="https://mainwebsite.com" target="_blank"
+                    <a href="https://eliezerkenya.pythonanywhere.com/lsb" target="_blank"
                        class="download-btn px-8 py-4 border border-white/50 hover:bg-white/10 rounded-3xl font-semibold flex items-center gap-3 text-lg transition-colors">
                         Learn more
                     </a>
@@ -75,7 +73,6 @@
             <div class="hidden md:flex justify-center">
                 <div class="relative">
                     <div class="w-80 h-80 bg-gradient-to-br from-violet-400 to-fuchsia-400 rounded-[4rem] rotate-12 shadow-2xl overflow-hidden">
-                        <!-- Mock phone -->
                         <div class="absolute inset-4 bg-zinc-900 rounded-[3rem] flex items-center justify-center">
                             <div class="text-center">
                                 <i class="fas fa-mobile-alt text-6xl text-white/70"></i>
@@ -90,7 +87,7 @@
     <section id="downloads" class="py-24 bg-zinc-900">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16">
-                <h2 class="text-5xl font-bold mb-4">Download SuperApp</h2>
+                <h2 class="text-5xl font-bold mb-4">Download LiveSongbook</h2>
                 <p class="text-zinc-400 text-xl max-w-md mx-auto">We've detected your device. Here's the best match.</p>
             </div>
 
@@ -104,8 +101,9 @@
 
     <footer class="bg-black py-12 border-t border-zinc-800">
         <div class="max-w-7xl mx-auto px-6 text-center text-zinc-500">
-            <p>&copy; 2026 SuperApp. All rights reserved.</p>
-            <p class="mt-2">Made with ❤️ for cross-platform excellence</p>
+            <p>&copy; 2026 LiveSongbook by Eliezer Kenya. All rights reserved.</p>
+            <p class="mt-2">Made with ❤️ for worship & music communities</p>
+            <a href="https://eliezerkenya.pythonanywhere.com" target="_blank" class="text-violet-400 hover:text-violet-300 mt-4 inline-block">Developer</a>
         </div>
     </footer>
 
@@ -114,22 +112,17 @@
             const ua = navigator.userAgent;
             const platform = navigator.platform.toLowerCase();
             let os = 'unknown';
-            let arch = '64'; // default
+            let arch = '64';
 
-            // OS Detection
             if (/android/i.test(ua)) {
                 os = 'android';
             } else if (/win/i.test(platform) || /win/i.test(ua)) {
                 os = 'windows';
             } else if (/linux/i.test(platform) || /linux/i.test(ua)) {
                 os = 'linux';
-            } else if (/mac/i.test(platform)) {
-                os = 'mac'; // though not specified, for completeness
             }
 
-            // Architecture for Android or others
             if (os === 'android') {
-                // Modern way if supported
                 if (navigator.userAgentData && navigator.userAgentData.getHighEntropyValues) {
                     navigator.userAgentData.getHighEntropyValues(['architecture', 'bitness']).then(data => {
                         if (data.architecture === 'arm' && data.bitness === '64') {
@@ -138,11 +131,9 @@
                             updateRecommendation('android', 'arm');
                         }
                     }).catch(() => {
-                        // Fallback
                         updateRecommendation('android', 'arm64');
                     });
                 } else {
-                    // Fallback for Android
                     if (ua.includes('64') || ua.includes('arm64')) {
                         arch = 'arm64';
                     } else {
@@ -160,21 +151,21 @@
                 windows: {
                     name: 'Windows',
                     icon: 'fab fa-windows',
-                    file: 'superapp-windows-x64.exe',
+                    file: 'livesongbook-windows-x64.exe',
                     size: '85 MB',
                     label: 'Download for Windows'
                 },
                 linux: {
                     name: 'Linux',
                     icon: 'fab fa-linux',
-                    file: 'superapp-linux-x64.tar.gz',
+                    file: 'livesongbook-linux-x64.tar.gz',
                     size: '72 MB',
                     label: 'Download for Linux'
                 },
                 android: {
                     name: `Android ${arch === 'arm64' ? '64-bit' : '32-bit'}`,
                     icon: 'fas fa-mobile-alt',
-                    file: arch === 'arm64' ? 'superapp-android-arm64.apk' : 'superapp-android-arm.apk',
+                    file: arch === 'arm64' ? 'livesongbook-android-arm64.apk' : 'livesongbook-android-arm.apk',
                     size: arch === 'arm64' ? '48 MB' : '42 MB',
                     label: `Download for Android ${arch === 'arm64' ? '64-bit' : ''}`
                 }
@@ -238,7 +229,6 @@
             document.getElementById('downloads').scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Initialize
         window.onload = function() {
             detectPlatform();
             populateAllDownloads();

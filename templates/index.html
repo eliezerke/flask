@@ -3,258 +3,558 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LiveSongbook — Visual Songbook for Musicians</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <title>Video/Audio downloader - Free Premium Downloader</title>
+    <link rel="icon" href="https://www.freeiconspng.com/uploads/folder-downloads-icon-png-13.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>(function(s){s.dataset.zone='11174380',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+    <script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9326933469758073" crossorigin="anonymous"></script>
+    <meta name="monetag" content="aee25b52be7fb1bb0ca622853d8861f9">
+    <meta name="google-site-verification" content="RaAtFE3JR813cZncSdGFdyDv6EhcaTEiqSLMhQGIN4Q"/>
+    <meta name="description" content="Video/Audio downloader - Free Premium Downloader, facebook, instagram and more..">
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
-        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Inter', system-ui, sans-serif;
-        }
-        
-        .logo-font {
-            font-family: 'Space Grotesk', sans-serif;
-        }
-
-        .hero-bg {
-            background: linear-gradient(135deg, #1a0f2e 0%, #2a1b4a 100%);
-        }
-
-        .music-bg {
-            background-image: 
-                linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)),
-                url('https://picsum.photos/id/1015/2000/1200');
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(rgba(11, 15, 25, 0.7), rgba(11, 15, 25, 0.7)), url('https://mcdn.wallpapersafari.com/medium/50/21/4tOFic.jpg');
             background-size: cover;
             background-position: center;
+            background-attachment: fixed;
+            color: #f8fafc;
+            min-height: 100vh;
+            line-height: 1.5;
+            display: flex;
+            flex-direction: column;
         }
 
-        .chord {
-            font-family: monospace;
-            color: #a855f7;
+        /* Navigation */
+        nav {
+            background: rgba(17, 24, 39, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .nav-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            font-size: 20px;
             font-weight: 700;
+            color: #ff9900;
+            letter-spacing: -0.5px;
+        }
+        .nav-logo img {
+            height: 32px;
+            width: auto;
+            object-fit: contain;
+            display: block;
+        }
+        .nav-logo{
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #94a3b8;
+            font-weight: 500;
+            font-size: 14px;
+            transition: color 0.2s ease;
+        }
+        .nav-links a:hover {
+            color: #60a5fa;
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+        .hamburger span {
+            width: 22px;
+            height: 2px;
+            background: #94a3b8;
+            border-radius: 2px;
+            transition: all 0.2s;
+        }
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 64px;
+            left: 0;
+            right: 0;
+            background: rgba(17, 24, 39, 0.95);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.5);
+            padding: 12px 24px;
+        }
+        .mobile-menu a {
+            display: block;
+            padding: 12px 0;
+            color: #94a3b8;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+        }
+        .mobile-menu a:hover {
+            color: #60a5fa;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+            .mobile-menu.active { display: block; }
+        }
+
+        /* Main Layout Card */
+        .main-wrapper {
+            flex: 1;
+            padding: 40px 24px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 840px;
+            background: rgba(17, 24, 39, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+        }
+
+        header {
+            background-image: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.85)), url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 56px 24px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        header h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: -0.75px;
+            color: #f8fafc;
+        }
+        header p {
+            font-size: 15px;
+            color: #94a3b8;
+            font-weight: 400;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* Input Area */
+        .input-area {
+            padding: 48px 32px;
+        }
+        .input-wrapper {
+            max-width: 640px;
+            margin: 0 auto;
+            display: flex;
+            position: relative;
+            background: rgba(31, 41, 55, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 6px;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        .input-wrapper:focus-within {
+            border-color: #3b82f6;
+            background: rgba(31, 41, 55, 0.9);
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.25);
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 12px 16px;
+            font-size: 16px;
+            border: none;
+            outline: none;
+            color: #f8fafc;
+            background: transparent;
+        }
+        input[type="text"]::placeholder {
+            color: #6b7280;
+        }
+
+        button {
+            padding: 12px 28px;
+            font-size: 15px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            white-space: nowrap;
+            transition: background 0.15s ease;
+        }
+        button:hover {
+            background: #3b82f6;
+        }
+
+        /* Loader & Results Styling */
+        #loading {
+            text-align: center;
+            padding: 32px;
+            color: #94a3b8;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .results {
+            padding: 0 32px 48px 32px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 32px;
+            display: none;
+        }
+        .video-info {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            margin-bottom: 36px;
+        }
+        @media (min-width: 640px) {
+            .video-info { flex-direction: row; align-items: center; }
+        }
+        .thumbnail {
+            width: 100%;
+            max-width: 240px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            object-fit: cover;
+        }
+        .video-details h2 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.4;
+            color: #f8fafc;
+        }
+        .video-details p {
+            font-size: 14px;
+            color: #94a3b8;
+            margin-bottom: 4px;
+        }
+
+        .formats {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 16px;
+        }
+
+        .format-card {
+            background: rgba(31, 41, 55, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .format-card strong {
+            font-size: 15px;
+            color: #f8fafc;
+        }
+        .format-card small {
+            font-size: 13px;
+            color: #94a3b8;
+            margin-top: 2px;
+            display: block;
+        }
+
+        .download-btn {
+            width: 100%;
+            padding: 10px 14px;
+            background: rgba(17, 24, 39, 0.6);
+            color: #e2e8f0;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            margin-top: 16px;
+            transition: all 0.15s ease;
+        }
+        .download-btn:hover {
+            background: #374151;
+            border-color: #94a3b8;
+            color: #f8fafc;
+        }
+        .error {
+            color: #fca5a5;
+            text-align: center;
+            padding: 24px;
+            background: #7f1d1d33;
+            border: 1px solid #7f1d1d;
+            border-radius: 12px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 24px;
+            color: #569af9;
+            font-size: 13px;
+            background: rgba(17, 24, 39, 0.267);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .truncate-fade {
+            white-space: nowrap;
+            overflow: hidden;
+            position: relative;
+            mask-image: linear-gradient(to right, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%);
+            -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%);
         }
     </style>
 </head>
-<body class="bg-zinc-950 text-white overflow-x-hidden">
-    <!-- Navbar -->
-    <nav class="bg-black/80 backdrop-blur-lg border-b border-zinc-800 fixed w-full z-50">
-        <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 bg-gradient-to-br from-purple-500 to-violet-600 rounded-2xl flex items-center justify-center text-2xl">
-                    🎵
-                </div>
-                <span class="logo-font text-3xl font-semibold tracking-tighter">livesongbook</span>
+<body>
+
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="#ff9900" style="display:inline-block; vertical-align:middle;"><path d="M16.64 16.27c-1.32.96-3.37 1.48-5.59 1.48-3.07 0-5.75-1-6.86-2.52-.08-.12-.02-.24.11-.2 1.14.33 3.63.46 5.56.46 2.45 0 5.09-.34 6.71-1.42.13-.08.23.03.07.2zm4.18-2.61c-.13-.17-.38-.11-.47.11-.4 1.04-1.37 2.46-2.59 3.32-.14.1-.09.25.07.19 1.4-.49 2.92-1.89 3.1-3.23.03-.23-.01-.3-.11-.39zM11.64 4c-3.66 0-6.64 2.98-6.64 6.64 0 2 .9 3.8 2.33 5.01.12.1.2.03.14-.11l-.47-1.1c-.05-.12-.17-.18-.29-.25A4.62 4.62 0 0 1 5 10.64c0-2.56 2.08-4.64 4.64-4.64s4.64 2.08 4.64 4.64c0 1.34-.57 2.55-1.49 3.4-.09.08-.06.2.04.26l1.09.61c.13.07.26.01.32-.12a6.6 6.6 0 0 0 .73-3.15C18.28 6.98 15.3 4 11.64 4z"/></svg>
+                elabs kenya
+            </a>
+
+            <div class="nav-links">
+                <a href="https://eliezerkenya.pythonanywhere.com/" target="_blank">Developer</a>
+                <a href="/shop#results">Shop</a>
+                <a href="https://elabskenya.pythonanywhere.com/support" target="_blank" class="coffee-btn" style="display: inline-flex; align-items: center; gap: 8px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); padding: 8px 16px; border-radius: 20px; color: #ffdd00; text-decoration: none; font-size: 14px; font-weight: 600; transition: all 0.2s ease;">
+                    <span>☕</span> Donate
+                </a>
             </div>
-            
-            <div class="hidden md:flex items-center gap-8 text-sm">
-                <a href="#features" class="hover:text-purple-400 transition">Features</a>
-                <a href="#how" class="hover:text-purple-400 transition">How it Works</a>
-                <a href="#demo" class="hover:text-purple-400 transition">Demo</a>
-                <a href="#pricing" class="hover:text-purple-400 transition">Pricing</a>
+
+            <div class="hamburger" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
-            
-            <div class="flex items-center gap-4">
-                <button class="px-6 py-2.5 text-sm font-medium hover:bg-white/10 rounded-2xl transition">Log in</button>
-                <button onclick="document.getElementById('get-started').scrollIntoView({ behavior: 'smooth' })"
-                        class="px-7 py-2.5 bg-white text-black font-semibold rounded-2xl hover:bg-purple-400 hover:text-white transition">
-                    Try Free
-                </button>
-            </div>
+        </div>
+
+        <div id="mobileMenu" class="mobile-menu">
+            <a href="https://eliezerkenyaportfolio.pythonanywhere.com/" target="_blank">Developer</a>
+            <a href="/shop#results">Shop</a>
+            <a href="https://elabskenya.pythonanywhere.com/support" target="_blank" class="coffee-btn" style="display: inline-flex; align-items: center; gap: 8px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); padding: 8px 16px; border-radius: 20px; color: #ffdd00; text-decoration: none; font-size: 14px; font-weight: 600; transition: all 0.2s ease;">
+                <span>☕</span> Donate
+            </a>
         </div>
     </nav>
 
-    <!-- Hero -->
-    <header class="hero-bg pt-32 pb-24 music-bg">
-        <div class="max-w-6xl mx-auto px-6 text-center">
-            <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-5 py-2 rounded-3xl text-sm mb-8 border border-white/20">
-                <span class="text-emerald-400">●</span>
-                Now used on stage by 12,000+ musicians
-            </div>
-            
-            <h1 class="text-7xl md:text-8xl font-bold tracking-tighter logo-font leading-none mb-6">
-                YOUR SONGS.<br>
-                <span class="bg-gradient-to-r from-purple-400 via-pink-400 to-violet-400 bg-clip-text text-transparent">BEAUTIFULLY VISUAL</span>
-            </h1>
-            
-            <p class="text-2xl text-zinc-300 max-w-2xl mx-auto mb-12">
-                The ultimate visual songbook for live performances, rehearsals &amp; worship teams.
-            </p>
-            
-            <div class="flex flex-col sm:flex-row gap-5 justify-center items-center">
-                <button onclick="document.getElementById('get-started').scrollIntoView({ behavior: 'smooth' })"
-                        class="px-10 py-5 bg-white text-black text-xl font-semibold rounded-3xl hover:scale-105 transition flex items-center gap-3">
-                    <i class="fas fa-play"></i>
-                    Start Free
-                </button>
-                
-                <button onclick="window.open('https://youtu.be/dQw4w9wgxcq', '_blank')"
-                        class="px-8 py-5 border border-white/40 hover:bg-white/10 text-xl font-medium rounded-3xl transition flex items-center gap-3">
-                    <i class="fas fa-video"></i>
-                    Watch Demo
-                </button>
-            </div>
-            
-            <div class="mt-16 flex justify-center items-center gap-8 text-sm text-zinc-400">
-                <div class="flex items-center gap-2">
-                    <i class="fas fa-mobile-alt"></i>
-                    <span>iOS &amp; Android</span>
-                </div>
-                <div class="flex items-center gap-2">
-                    <i class="fas fa-laptop"></i>
-                    <span>Works Offline</span>
-                </div>
-                <div class="flex items-center gap-2">
-                    <i class="fas fa-bolt"></i>
-                    <span>Auto-scroll</span>
-                </div>
-            </div>
-        </div>
-    </header>
+    <div class="main-wrapper">
+        <div class="container">
+            <header>
+                <h1>Download Any Video</h1>
+                <p>Paste your link below to download high-quality videos from Facebook, Instagram and more.</p>
+            </header>
 
-    <!-- Features -->
-    <section id="features" class="py-24 bg-zinc-900">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-5xl font-bold tracking-tight mb-4">Built for the stage</h2>
-                <p class="text-xl text-zinc-400 max-w-md mx-auto">Everything you need to perform with confidence</p>
-            </div>
-            
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-zinc-800/50 border border-zinc-700 rounded-3xl p-8 hover:border-purple-500 transition group">
-                    <div class="text-4xl mb-6">📜</div>
-                    <h3 class="text-2xl font-semibold mb-3">Beautiful Lyrics</h3>
-                    <p class="text-zinc-400">Clean, large-font display with smart chord placement above lyrics.</p>
-                </div>
-                
-                <div class="bg-zinc-800/50 border border-zinc-700 rounded-3xl p-8 hover:border-purple-500 transition group">
-                    <div class="text-4xl mb-6">🎸</div>
-                    <h3 class="text-2xl font-semibold mb-3">Interactive Chords</h3>
-                    <p class="text-zinc-400">Tap any chord to see diagrams, transpose instantly, and more.</p>
-                </div>
-                
-                <div class="bg-zinc-800/50 border border-zinc-700 rounded-3xl p-8 hover:border-purple-500 transition group">
-                    <div class="text-4xl mb-6">⚡</div>
-                    <h3 class="text-2xl font-semibold mb-3">Live Auto-Scroll</h3>
-                    <p class="text-zinc-400">Foot pedal, timer, or voice-activated scrolling. Perfect for live sets.</p>
-                </div>
-                
-                <div class="bg-zinc-800/50 border border-zinc-700 rounded-3xl p-8 hover:border-purple-500 transition group">
-                    <div class="text-4xl mb-6">📋</div>
-                    <h3 class="text-2xl font-semibold mb-3">Smart Setlists</h3>
-                    <p class="text-zinc-400">Build, reorder, and share setlists in seconds.</p>
-                </div>
-                
-                <div class="bg-zinc-800/50 border border-zinc-700 rounded-3xl p-8 hover:border-purple-500 transition group">
-                    <div class="text-4xl mb-6">🌙</div>
-                    <h3 class="text-2xl font-semibold mb-3">Dark Mode Optimized</h3>
-                    <p class="text-zinc-400">High-contrast design made for dark stages and bright sunlight.</p>
-                </div>
-                
-                <div class="bg-zinc-800/50 border border-zinc-700 rounded-3xl p-8 hover:border-purple-500 transition group">
-                    <div class="text-4xl mb-6">☁️</div>
-                    <h3 class="text-2xl font-semibold mb-3">Sync Across Devices</h3>
-                    <p class="text-zinc-400">Start a song on your phone, continue on your tablet.</p>
+            <div class="input-area">
+                <div class="input-wrapper">
+                    <input type="text" id="urlInput" placeholder="Paste video or reel URL here..." />
+                    <button onclick="fetchVideoInfo()">Get Formats</button>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Live Preview / Demo -->
-    <section id="demo" class="py-20 bg-black">
-        <div class="max-w-5xl mx-auto px-6">
-            <div class="bg-zinc-900 rounded-3xl overflow-hidden border border-zinc-700">
-                <div class="bg-zinc-950 p-4 flex items-center gap-3 border-b border-zinc-800">
-                    <div class="flex-1 flex gap-2">
-                        <div class="w-3 h-3 bg-red-500 rounded-full"></div>
-                        <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                        <div class="w-3 h-3 bg-green-500 rounded-full"></div>
-                    </div>
-                    <div class="text-xs text-zinc-500 font-mono">How Great Is Our God — Key: G</div>
-                </div>
-                
-                <!-- Fake Song Display -->
-                <div class="p-12 bg-gradient-to-b from-zinc-950 to-zinc-900 min-h-[420px] font-mono text-2xl leading-relaxed">
-                    <div class="max-w-3xl mx-auto">
-                        <p class="text-purple-400 text-xl mb-6">G          Em         C          D</p>
-                        <p class="mb-8">The splendor of the King, clothed in majesty</p>
-                        
-                        <p class="text-purple-400 text-xl mb-6">G              D/F#       Em</p>
-                        <p class="mb-8">Let all the earth rejoice, all the earth rejoice</p>
-                        
-                        <p class="text-amber-400 font-bold text-3xl mt-12">Chorus</p>
-                        <p class="text-purple-400 text-xl my-6">C          G         D         Em</p>
-                        <p>How great is our God, sing with me</p>
-                    </div>
-                </div>
+            <div id="loading" style="display: none;">
+                Analyzing video link... Please wait.
             </div>
-            <p class="text-center text-zinc-500 mt-6 text-sm">Real-time view from LiveSongbook • Tap chords for diagrams</p>
-        </div>
-    </section>
 
-    <!-- How it works -->
-    <section id="how" class="py-24 bg-zinc-900">
-        <div class="max-w-7xl mx-auto px-6">
-            <h2 class="text-5xl font-bold text-center mb-16">From song to stage in seconds</h2>
-            
-            <div class="grid md:grid-cols-3 gap-10">
-                <div class="text-center">
-                    <div class="mx-auto w-16 h-16 bg-purple-900/50 rounded-2xl flex items-center justify-center text-4xl mb-6">1️⃣</div>
-                    <h3 class="text-xl font-semibold mb-3">Import or Create</h3>
-                    <p class="text-zinc-400">Upload ChordPro, copy from Ultimate Guitar, or write directly in the app.</p>
-                </div>
-                <div class="text-center">
-                    <div class="mx-auto w-16 h-16 bg-purple-900/50 rounded-2xl flex items-center justify-center text-4xl mb-6">2️⃣</div>
-                    <h3 class="text-xl font-semibold mb-3">Visualize &amp; Polish</h3>
-                    <p class="text-zinc-400">Add annotations, set custom colors, transpose, and preview in live mode.</p>
-                </div>
-                <div class="text-center">
-                    <div class="mx-auto w-16 h-16 bg-purple-900/50 rounded-2xl flex items-center justify-center text-4xl mb-6">3️⃣</div>
-                    <h3 class="text-xl font-semibold mb-3">Perform Confidently</h3>
-                    <p class="text-zinc-400">Use on stage with auto-scroll, foot pedal support, and zero distractions.</p>
-                </div>
+            <div id="results" class="results">
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- CTA -->
-    <section id="get-started" class="py-28 bg-gradient-to-br from-purple-600 via-violet-600 to-fuchsia-600">
-        <div class="max-w-2xl mx-auto text-center px-6">
-            <h2 class="text-5xl font-bold mb-6">Ready to take your music to the next level?</h2>
-            <p class="text-2xl text-purple-100 mb-10">Start completely free. No credit card required.</p>
-            
-            <button onclick="alert('Thank you! In a real app this would open the App Store / Play Store or sign-up flow.')"
-                    class="px-12 py-6 bg-white text-black text-2xl font-semibold rounded-3xl hover:bg-yellow-300 transition transform hover:scale-105">
-                Download LiveSongbook Free
-            </button>
-            
-            <div class="mt-8 text-purple-200 text-sm flex items-center justify-center gap-8">
-                <div>Available on iOS &amp; Android</div>
-                <div>⭐ 4.9 • 8,400+ reviews</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-black py-16">
-        <div class="max-w-7xl mx-auto px-6 text-zinc-400">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-8">
-                <div class="flex items-center gap-3">
-                    <div class="w-9 h-9 bg-gradient-to-br from-purple-500 to-violet-600 rounded-2xl flex items-center justify-center text-xl">🎵</div>
-                    <span class="logo-font text-3xl font-semibold tracking-tighter text-white">livesongbook</span>
-                </div>
-                
-                <div class="text-sm text-center md:text-right">
-                    Made for musicians, by musicians.<br>
-                    © 2026 LiveSongbook
-                </div>
-            </div>
-        </div>
+    <footer>
+        eliezerkenya. all rights reserved. thank you for being part of our community!<br>
+        <a style="text-decoration: underline; color: #569af9;" href="https://github.com/eliezerke/free-downloader" target="_blank">GitHub</a><p style="display:inline;"> | </p>
+         <a style="text-decoration: underline; color: #569af9;" href="https://facebook.com/eliezerkenya" target="_blank">Facebook</a> <p style="display:inline;"> | </p>
+         <a style="text-decoration: underline; color: #569af9;" href="https://eliezerkenya.pythonanywhere.com/contact" target="_blank">Feedback</a>
     </footer>
 
-    <script>
-        // Simple Tailwind script already loaded
-        console.log('%cLiveSongbook landing page ready 🎸', 'color:#c026d3; font-size:14px;');
-    </script>
+<script>
+    function toggleMobileMenu() {
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileMenu.classList.toggle('active');
+    }
+
+    document.querySelectorAll('.mobile-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+            document.getElementById('mobileMenu').classList.remove('active');
+        });
+    });
+
+    async function fetchVideoInfo() {
+        const url = document.getElementById('urlInput').value.trim();
+        if (!url) {
+            alert("Please paste a video URL");
+            return;
+        }
+
+        document.getElementById('loading').style.display = 'block';
+        document.getElementById('results').style.display = 'none';
+
+        try {
+            const response = await fetch('/api/info', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ url: url })
+            });
+
+            const data = await response.json();
+            if (data.error) throw new Error(data.error);
+
+            displayResults(data);
+        } catch (err) {
+            document.getElementById('results').innerHTML = `
+                <div class="error">
+                    <h3 style="font-weight:600; margin-bottom:4px;">Something went wrong</h3>
+                    <p>${err.message}</p>
+                </div>`;
+            document.getElementById('results').style.display = 'block';
+        } finally {
+            document.getElementById('loading').style.display = 'none';
+        }
+    }
+
+    async function startDownload(formatUrl, filename, btn) {
+        const originalText = btn.textContent;
+
+        try {
+            btn.textContent = "Downloading...";
+            btn.style.pointerEvents = "none";
+
+            const proxyUrl = `/api/download?url=${encodeURIComponent(formatUrl)}&filename=${encodeURIComponent(filename)}`;
+
+            // Perform a safe validation pre-flight checks on the custom application route endpoint
+            const response = await fetch(proxyUrl, { method: 'GET' });
+
+            // If the backend has issued a 302/301 redirect frame or blocked CORS pipeline:
+            if (response.redirected || !response.ok) {
+                // Instantly escape memory proxying and drop client browser onto direct link fallback layout destination
+                window.open(response.url || formatUrl, '_blank');
+                btn.textContent = "Opened Source!";
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.pointerEvents = "auto";
+                }, 2500);
+                return;
+            }
+
+            // Normal operation path: stream proxy connection directly inside file reader blocks
+            const blob = await response.blob();
+            const downloadUrl = URL.createObjectURL(blob);
+
+            const a = document.createElement('a');
+            a.href = downloadUrl;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+
+            URL.revokeObjectURL(downloadUrl);
+            btn.textContent = "Saved!";
+
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.style.pointerEvents = "auto";
+            }, 2500);
+
+        } catch (err) {
+            // This catch handles instances where CORS blocks reading the failed proxy route
+            console.warn("Proxy block caught. Attempting direct browser link failover escape route strategy...", err);
+
+            // Seamlessly open the direct original link fallback asset in a separate window frame
+            window.open(formatUrl, '_blank');
+            btn.textContent = "Opened External Link!";
+
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.style.pointerEvents = "auto";
+            }, 2500);
+        }
+    }
+
+    function displayResults(info) {
+        const resultsDiv = document.getElementById('results');
+        let formatsHTML = '';
+        let fallbackImage = "https://diplo-media.s3.eu-central-1.amazonaws.com/2023/06/default-video-thumbnail.jpg";
+
+        info.formats.forEach(format => {
+            const size = format.filesize ? (format.filesize / 1024 / 1024).toFixed(1) + ' MB' : 'Size calculation dynamic';
+            const isAudio = format.vcodec === 'none';
+            const quality = isAudio ? 'Audio Format' : `${format.height || '720'}p High Definition`;
+            const ext = format.ext.toUpperCase();
+
+            const cleanTitle = info.title.replace(/[^a-zA-Z0-9]/g, '_').substring(0, 80);
+            const filename = `${cleanTitle}_${quality}.${format.ext}`;
+
+            formatsHTML += `
+                <div class="format-card">
+                    <div>
+                        <strong>${quality} (${ext})</strong>
+                        <small>${format.format_note || 'Standard Option'} • ${size}</small>
+                    </div>
+                    <button onclick="startDownload('${format.url}', '${filename}', this)" class="download-btn">
+                        Download ${isAudio ? 'Audio' : 'Video'}
+                    </button>
+                </div>`;
+        });
+
+        const rawTitle = info.title || 'Untitled Video';
+        const safeUiTitle = rawTitle.length > 95 ? rawTitle.substring(0, 95) : rawTitle;
+
+        resultsDiv.innerHTML = `
+        <div class="video-info">
+            <img src="${info.thumbnail}" class="thumbnail" alt="Video Thumbnail" onerror="this.onerror=null; this.src='${fallbackImage}';" />
+            <div class="video-details" style="min-width: 0; flex: 1;">
+                <h2 class="truncate-fade" title="${rawTitle}">${safeUiTitle}</h2>
+                <p><strong>Creator:</strong> ${info.uploader || 'External Creator'}</p>
+                <p><strong>Length:</strong> ${Math.floor(info.duration / 60)}:${(info.duration % 60).toString().padStart(2, '0')}</p>
+            </div>
+        </div>
+
+        <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px; color: #f8fafc;">Available Resolutions & Alternatives</h3>
+        <div class="formats">
+            ${formatsHTML}
+        </div>`;
+
+        resultsDiv.style.display = 'block';
+    }
+</script>
 </body>
 </html>

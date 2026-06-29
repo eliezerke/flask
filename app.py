@@ -3,17 +3,35 @@ import yt_dlp
 import os
 import requests
 from dotenv import load_dotenv
+from supabase import create_client, Client
 
 load_dotenv()
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
 
+supabase_url = os.getenv("SUPABASE_URL")
+supabase_key = os.getenv("SUPABASE_KEY")
+supabase: Client = create_client(supabase_url, supabase_key)
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
+@app.route('/api/logs', methods=['GET'])
+def get_logs():
+    try:
+        # Fetching logs from Supabase
+        # .order('created_at', desc=True) sorts them by newest first
+        response = supabase.table("download_logs") \
+            .select("*") \
+            .order("created_at", desc=True) \
+            .execute()
+        
+        return jsonify(response.data), 200
+    except Exception as e:
+        return jsonify({'error': f"Failed to fetch logs: {str(e)}"}), 500
+    
 @app.route('/api/info', methods=['POST'])
 def get_video_info():
     data = request.get_json()
@@ -51,6 +69,15 @@ def proxy_download():
     filename = request.args.get('filename', 'video.mp4')
     if not video_url:
         return jsonify({'error': 'No URL provided'}), 400
+    
+    try:
+        supabase.table("download_logs").insert({
+            "video_url": video_url,
+            "filename": filename
+        }).execute()
+    except Exception as e:
+        app.logger.error(f"Failed to log to Supabase: {str(e)}")
+
     try:
         headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}
         # Reduce timeout settings if you want it to fail over quickly when a connection hangs

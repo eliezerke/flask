@@ -201,12 +201,12 @@
 
         function getDownloadInfo(os, arch = '64') {
             const base = {
-                windows: { name: 'Windows', icon: 'fab fa-windows', file: 'livesongbook-windows-x64.exe', size: '85 MB', label: 'Download for Windows' },
-                linux: { name: 'Linux', icon: 'fab fa-linux', file: 'livesongbook-linux-x64.tar.gz', size: '72 MB', label: 'Download for Linux' },
+                windows: { name: 'Windows', icon: 'fab fa-windows', file: 'exe', size: '33.0 MB', label: 'Download for Windows' },
+                linux: { name: 'Linux', icon: 'fab fa-linux', file: 'deb', size: '72 MB', label: 'Download for Linux' },
                 android: { 
                     name: `Android ${arch === 'arm64' ? '64-bit' : '32-bit'}`, 
                     icon: 'fas fa-mobile-alt', 
-                    file: arch === 'arm64' ? 'livesongbook-android-arm64.apk' : 'livesongbook-android-arm.apk', 
+                    file: arch === 'arm64' ? 'apk' : 'armabi-v7a', 
                     size: arch === 'arm64' ? '48 MB' : '42 MB', 
                     label: `Download for Android ${arch === 'arm64' ? '64-bit' : ''}` 
                 }
@@ -223,7 +223,7 @@
                     </div>
                     <h3 class="text-2xl font-semibold mb-2">Recommended for you</h3>
                     <p class="text-emerald-400 text-lg mb-6">${info.name}</p>
-                    <a href="/downloads/${info.file}" 
+                    <a onclick="window.open('/download/${info.file}');" 
                        class="download-btn inline-flex items-center justify-center gap-3 w-full bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-500 hover:to-fuchsia-500 text-white py-5 px-8 rounded-3xl font-semibold text-lg shadow-xl">
                         <i class="fas fa-download"></i>
                         ${info.label} (${info.size})

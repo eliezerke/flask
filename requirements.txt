@@ -1,5 +1,1 @@
 flask
-python-dotenv
-yt_dlp
-requests
-supabase

@@ -1,7 +1,11 @@
 from flask import Flask, render_template
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
-app.config["SECReT-KEY"] = "nowdwhdfuiwefydf7e23qfid3dwe9dfwqidhwfuebflqwiof2w837773ydwd"
+app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
 
 @app.route("/")
 def index():
